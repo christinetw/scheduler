@@ -3,6 +3,7 @@
 import "components/Application.scss";
 import DayList from "./DayList";
 import React, { useState } from "react";
+import InterviewerList from "./nterviewerList";
 
 
 const days = [
@@ -23,8 +24,11 @@ const days = [
   },
 ];
 
+
 export default function Application(props) {
   const [day, setDay] = useState("Monday");
+ 
+
   return (
     <main className="layout">
       <section className="sidebar">
@@ -34,15 +38,20 @@ export default function Application(props) {
           alt="Interview Scheduler"
         />
         <hr className="sidebar__separator sidebar--centered" />
-        <section className="schedule">
-        <DayList days={days} day={day} setDay={setDay} />
-      </section>
+        
+          <DayList days={days} value={day} onChange={setDay} />
+       
         <nav className="sidebar__menu"></nav>
         <img
           className="sidebar__lhl sidebar--centered"
           src="images/lhl.png"
           alt="Lighthouse Labs"
         />      </section>
+
+       <section className="schedule">
+       
+       
+      </section>
     </main>
   );
 }
