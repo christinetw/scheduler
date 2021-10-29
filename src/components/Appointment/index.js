@@ -1,18 +1,19 @@
+import React from 'react';
+import 'components/Appointment/styles.scss';
 
-import React from "react";
-import "./styles.scss";
-import "./Header.js";
-import "./Empty.js";
-import "./Show.js";
-import "./Confirm.js";
-import "./Status.js";
-import "./Error.js";
+import Header from './Header.js';
+import Show from './Show.js';
+import Empty from './Empty.js';
+import Form from './Form.js';
+import Status from './Status.js';
+import Confirm from './Confirm.js';
+import Error from './Error.js';
 
 export default function Appointment(props) {
-
-  return(
-<article className="appointment">
- 
-</article>
-  )
-};
+  return (
+    <article className='appointment' >
+      <Header time={props.time} />
+      {(props.interview) ? <Show interview={props.interview} /> : <Empty />}
+    </article>
+  );
+}
