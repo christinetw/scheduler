@@ -3,7 +3,7 @@ import DayList from "./DayList";
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Appointment from "./Appointment";
-import getAppointmentsForDay, { getInterview } from 'helpers/selectors.js';
+import getAppointmentsForDay, { getInterview, getInterviewersForDay } from 'helpers/selectors.js';
 
 
 export default function Application(props) {
@@ -16,6 +16,7 @@ export default function Application(props) {
   });
 
   let dailyAppointments = {};
+  let dailyInterviewers = [];
   let schedule = [];
   const setDay = day => { setState({ ...state, day }); }
 
@@ -33,12 +34,15 @@ export default function Application(props) {
 
   //console.log(state.interviewers);
   dailyAppointments = getAppointmentsForDay(state, state.day);
+  dailyInterviewers = getInterviewersForDay(state, state.day);
+
   schedule = Object.keys(dailyAppointments).map(appt => {
     const interview = getInterview(state, dailyAppointments[appt].interview);
     //console.log("result = " + JSON.stringify(interview));
     return (
       <Appointment
         interview={interview}
+        interviewers={dailyInterviewers}
         id={dailyAppointments[appt].id}
         key={dailyAppointments[appt].id}
         time={dailyAppointments[appt].time}

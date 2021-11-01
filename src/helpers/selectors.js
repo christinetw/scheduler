@@ -16,6 +16,24 @@ export default function getAppointmentsForDay(state, day) {
   return result;
 }
 
+export function getInterviewersForDay(state, day) {
+  if (!state.days) {
+    return [];
+  }
+
+  let theDay = state.days.filter(d => d.name === day)[0];
+  if (!theDay) {
+    return [];
+  }
+
+  let result = [];
+  for (const id of theDay.interviewers) {
+    result.push(state.interviewers[id]);
+  }
+
+  return result;
+}
+
 export function getInterview(state, interview) {
 
   //console.log("interview = " + JSON.stringify(interview));
