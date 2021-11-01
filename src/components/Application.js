@@ -12,7 +12,7 @@ export default function Application(props) {
     day: "Monday",
     days: [],
     appointments: {},
-    interviewers: {},
+    interviewers: {}
   });
 
   let dailyAppointments = {};
@@ -32,6 +32,22 @@ export default function Application(props) {
 
   }, []);
 
+  function bookInterview(id, interview) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+    setState({
+      ...state,
+      appointments
+    });
+
+    console.log(id, interview);
+  }
   //console.log(state.interviewers);
   dailyAppointments = getAppointmentsForDay(state, state.day);
   dailyInterviewers = getInterviewersForDay(state, state.day);
@@ -46,9 +62,11 @@ export default function Application(props) {
         id={dailyAppointments[appt].id}
         key={dailyAppointments[appt].id}
         time={dailyAppointments[appt].time}
+        bookInterview={bookInterview}
       />
     );
   });
+
 
   return (<main className="layout">
     <section className="sidebar">
