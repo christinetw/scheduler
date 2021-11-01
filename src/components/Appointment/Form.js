@@ -9,14 +9,14 @@ export default function Form(props) {
   const [error, setError] = useState("");
 
 
-  const reset = function() {
+  const reset = function () {
     setName('');
     setError('');
     setInterviewer(null);
   };
 
-  
-  const cancel = function() {
+
+  const cancel = function () {
     reset();
     props.onCancel();
   };
@@ -36,37 +36,31 @@ export default function Form(props) {
     props.onSave(name, interviewer);
   }
 
+  return (
+    <main className="appointment__card appointment__card--create">
+      <section className="appointment__card-left">
+        <form autoComplete="off">
+          <input
+            className="appointment__create-input text--semi-bold"
+            name="name"
+            type="text"
+            placeholder="Enter Student Name"
+            value={name}
+            onChange={event => setName(event.target.value)}
+            data-testid="student-name-input"
+          />
+          <section className="appointment__validation">{error}</section>
+        </form>
+        <InterviewerList interviewers={props.interviewers} value={interviewer} onChange={setInterviewer} />
+      </section>
 
 
-
-
-
-
-  return(
-<main className="appointment__card appointment__card--create">
-  <section className="appointment__card-left">
-    <form autoComplete="off">
-      <input
-        className="appointment__create-input text--semi-bold"
-        name="name"
-        type="text"
-        placeholder="Enter Student Name"
-        value={name}
-        onChange={event => setName(event.target.value)}
-        data-testid="student-name-input"
-      />
-      <section className="appointment__validation">{error}</section>
-    </form>
-    <InterviewerList interviewers={props.interviewers} value={interviewer} onChange={setInterviewer} />
-  </section>
-
-  
-  <section className="appointment__card-right">
-    <section className="appointment__actions">
-      <Button onClick={cancel} danger>Cancel</Button>
-      <Button onClick={validate} danger>Save</Button>
-    </section>
-  </section>
-</main>
+      <section className="appointment__card-right">
+        <section className="appointment__actions">
+          <Button onClick={cancel} danger>Cancel</Button>
+          <Button onClick={validate} danger>Save</Button>
+        </section>
+      </section>
+    </main>
   )
 };
