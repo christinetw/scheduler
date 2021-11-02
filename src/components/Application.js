@@ -41,13 +41,22 @@ export default function Application(props) {
       ...state.appointments,
       [id]: appointment
     };
-    setState({
-      ...state,
-      appointments
-    });
 
-    console.log(id, interview);
+    const url = `/api/appointments/${id}`;
+    const data = `{"interview":${JSON.stringify(interview)}}`;
+    return axios.put(url, data, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(res => { 
+        setState({
+          ...state,
+          appointments
+        });    
+       });
   }
+
   //console.log(state.interviewers);
   dailyAppointments = getAppointmentsForDay(state, state.day);
   dailyInterviewers = getInterviewersForDay(state, state.day);
