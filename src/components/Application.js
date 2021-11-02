@@ -49,12 +49,24 @@ export default function Application(props) {
         'Content-Type': 'application/json'
       }
     })
-      .then(res => { 
+      .then(res => {
         setState({
           ...state,
           appointments
-        });    
-       });
+        });
+      });
+  }
+
+  function cancelInterview(id) {
+    const url = `/api/appointments/${id}`;
+    return axios.delete(url, '', {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(res => {
+        state.appointments[id].interview = null;
+      });
   }
 
   //console.log(state.interviewers);
@@ -72,6 +84,7 @@ export default function Application(props) {
         key={dailyAppointments[appt].id}
         time={dailyAppointments[appt].time}
         bookInterview={bookInterview}
+        cancelInterview={cancelInterview}
       />
     );
   });
