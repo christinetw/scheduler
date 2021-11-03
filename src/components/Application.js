@@ -4,71 +4,21 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Appointment from "./Appointment";
 import getAppointmentsForDay, { getInterview, getInterviewersForDay } from 'helpers/selectors.js';
+import useApplicationData  from "hooks/useApplicationData.js";
 
 
 export default function Application(props) {
-
-  const [state, setState] = useState({
-    day: "Monday",
-    days: [],
-    appointments: {},
-    interviewers: {}
-  });
+  const {
+    state,
+    setDay,
+    bookInterview,
+    cancelInterview
+  } = useApplicationData();
 
   let dailyAppointments = {};
   let dailyInterviewers = [];
   let schedule = [];
-  const setDay = day => { setState({ ...state, day }); }
-
-  useEffect(() => {
-    Promise.all([
-      axios.get('/api/days'),
-      axios.get('/api/appointments'),
-      axios.get('api/interviewers')
-
-    ]).then(all => {
-      setState(prev => ({ ...prev, days: all[0].data, appointments: all[1].data, interviewers: all[2].data }));
-    });
-
-  }, []);
-
-  function bookInterview(id, interview) {
-    const appointment = {
-      ...state.appointments[id],
-      interview: { ...interview }
-    };
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment
-    };
-
-    const url = `/api/appointments/${id}`;
-    const data = `{"interview":${JSON.stringify(interview)}}`;
-    return axios.put(url, data, {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(res => {
-        setState({
-          ...state,
-          appointments
-        });
-      });
-  }
-
-  function cancelInterview(id) {
-    const url = `/api/appointments/${id}`;
-    return axios.delete(url, '', {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(res => {
-        state.appointments[id].interview = null;
-      });
-  }
-
+  
   //console.log(state.interviewers);
   dailyAppointments = getAppointmentsForDay(state, state.day);
   dailyInterviewers = getInterviewersForDay(state, state.day);
