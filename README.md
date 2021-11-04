@@ -1,6 +1,6 @@
 
 ## Scheduler Project
-React scheduler with up to five appointments per day. The information will be synced over multiple clients with the help of Web Sockets.
+build and test a React application that allows users to book and cancel interviews. and combine a concise API with a WebSocket server to build a realtime experience.
 
 ## Final Product
 
