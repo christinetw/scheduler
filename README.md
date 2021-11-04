@@ -48,7 +48,7 @@ Each story is a specific test that verifies the visual display and behaviour of 
 
 <img width="749" alt="storybook" src="https://user-images.githubusercontent.com/88121887/140253489-70adbeac-1909-45e3-afe8-d82270ba956e.png">
 
-### Storybook Component Tests
-Cypress E2E Tests
+### Cypress E2E Tests
+
 
 <img width="1168" alt="cypress" src="https://user-images.githubusercontent.com/88121887/140253729-e419bb47-b587-403d-a698-83e9f58aaa51.png">
