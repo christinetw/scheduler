@@ -52,3 +52,17 @@ Each story is a specific test that verifies the visual display and behaviour of 
 
 
 <img width="1168" alt="cypress" src="https://user-images.githubusercontent.com/88121887/140253729-e419bb47-b587-403d-a698-83e9f58aaa51.png">
+
+
+## Getting Started
+1.Install all dependencies (using the npm install command).
+2.Get and install the server.
+3.Run both the server and the client.
+
+## Dependencies
+axios
+classnames
+normalize.css
+react
+react-dom
+react-scripts
