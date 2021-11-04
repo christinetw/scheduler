@@ -55,14 +55,14 @@ Each story is a specific test that verifies the visual display and behaviour of 
 
 
 ## Getting Started
-1.Install all dependencies (using the npm install command).
-2.Get and install the server.
-3.Run both the server and the client.
+- Install all dependencies (using the npm install command).
+- Get and install the server.
+- Run both the server and the client.
 
 ## Dependencies
-axios
-classnames
-normalize.css
-react
-react-dom
-react-scripts
+- axios
+- classnames
+- normalize.css
+- react
+- react-dom
+- react-scripts
