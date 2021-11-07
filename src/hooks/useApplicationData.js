@@ -1,5 +1,5 @@
 
-import {useEffect,useState }  from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 export default function useApplicationData(initial) {
@@ -31,11 +31,14 @@ export default function useApplicationData(initial) {
    * @param {*} modifyValue - 1 to increase, -1 to decrease
    */
   function updateSpots(appointmentId, modifyValue) {
-    for (const thisDay of state.days) {
+    const days = state.days;
+    for (const thisDay of days) {
       if (thisDay.appointments.includes(appointmentId)) {
         thisDay.spots += modifyValue;
+        break;
       }
     }
+    setState({ ...state, days });
   }
 
   function bookInterview(id, interview) {
@@ -56,11 +59,8 @@ export default function useApplicationData(initial) {
       }
     })
       .then(res => {
-        setState({
-          ...state,
-          appointments
-        });
         updateSpots(id, -1);
+        setState({...state, appointments });
       });
   }
 
@@ -72,11 +72,13 @@ export default function useApplicationData(initial) {
       }
     })
       .then(res => {
-        state.appointments[id].interview = null;
         updateSpots(id, 1);
+        const appointments = state.appointments;
+        appointments[id].interview = null;
+        setState({...state, appointments });
       });
 
 
-}
-return { state ,setDay, bookInterview,cancelInterview };
+  }
+  return { state, setDay, bookInterview, cancelInterview };
 }
