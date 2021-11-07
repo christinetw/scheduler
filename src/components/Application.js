@@ -19,7 +19,6 @@ export default function Application(props) {
   let dailyInterviewers = [];
   let schedule = [];
   
-  //console.log(state.interviewers);
   dailyAppointments = getAppointmentsForDay(state, state.day);
   dailyInterviewers = getInterviewersForDay(state, state.day);
 
