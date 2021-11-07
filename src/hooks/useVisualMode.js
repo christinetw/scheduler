@@ -5,6 +5,11 @@ export default function useVisualMode(initial) {
   const [mode, setMode] = useState(initial);
   const [history, setHistory] = useState([initial]);
 
+  /**
+   * Transition to a new React mode
+   * @param {} mode 
+   * @param {*} replace 
+   */
   function transition(mode, replace = false) {
     if (replace) {
       setMode(mode);
@@ -14,6 +19,9 @@ export default function useVisualMode(initial) {
     }
   }
 
+  /**
+   * Go back to the previous React mode using history
+   */
   function back() {
     if (history.length === 1) {
       setMode(initial);

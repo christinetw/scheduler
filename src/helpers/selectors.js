@@ -1,4 +1,10 @@
 
+/**
+ * Get all the apointments for the given day
+ * @param {} state application state
+ * @param {*} day day of the week we're interested in
+ * @returns all appointments for the day
+ */
 export default function getAppointmentsForDay(state, day) {
   if (!state.days) return [];
 
@@ -14,6 +20,12 @@ export default function getAppointmentsForDay(state, day) {
   return result;
 }
 
+/**
+ * Get all interviewers on the given day
+ * @param {} state application state
+ * @param {*} day day of the week we are interested in
+ * @returns all interviewers for this day
+ */
 export function getInterviewersForDay(state, day) {
   if (!state.days) return [];
 
@@ -28,14 +40,18 @@ export function getInterviewersForDay(state, day) {
   return result;
 }
 
+/**
+ * Get interview object with interviewer and student
+ * @param {} state application state
+ * @param {*} interview interview object
+ * @returns new interview object with student
+ */
 export function getInterview(state, interview) {
 
   let interviewersObj = state.interviewers;
   let result = {};
 
-  if (!interviewersObj || !interview) {
-    return null;
-  }
+  if (!interviewersObj || !interview) return null;
 
   const intObj = interviewersObj[interview.interviewer];
   result["interviewer"] = intObj;
